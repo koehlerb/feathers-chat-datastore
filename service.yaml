@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    run: feathers-chat-datastore
+  name: feathers-chat-datastore
+spec:
+  ports:
+  - port: 3030
+  selector:
+    run: feathers-chat-datastore
+  type: LoadBalancer

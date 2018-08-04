@@ -94,7 +94,7 @@ const addUser = user => {
 
     // Update the number of users
     const userCount = document.querySelectorAll('.user-list li').length;
-    
+
     document.querySelector('.online-count').innerHTML = userCount;
   }
 };
@@ -145,14 +145,16 @@ const showChat = async () => {
       $limit: 25
     }
   });
-  
+
   // We want to show the newest message last
-  messages.data.reverse().forEach(addMessage);
+  // messages.data.reverse().forEach(addMessage);
+  messages.reverse().forEach(addMessage);
 
   // Find all users
   const users = await client.service('users').find();
 
-  users.data.forEach(addUser);
+  // users.data.forEach(addUser);
+  users.forEach(addUser);
 };
 
 // Retrieve email/password object from the login/signup page
@@ -191,7 +193,7 @@ document.addEventListener('click', async ev => {
   case 'signup': {
     // For signup, create a new user and then log them in
     const credentials = getCredentials();
-    
+
     // First create the user
     await client.service('users').create(credentials);
     // If successful log them in
@@ -208,9 +210,9 @@ document.addEventListener('click', async ev => {
   }
   case 'logout': {
     await client.logout();
-    
+
     document.getElementById('app').innerHTML = loginHTML;
-    
+
     break;
   }
   }

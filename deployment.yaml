@@ -1,0 +1,35 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    run: feathers-chat-datastore
+  name: feathers-chat-datastore
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: feathers-chat-datastore
+  template:
+    metadata:
+      labels:
+        run: feathers-chat-datastore
+    spec:
+      volumes:
+      - name: google-cloud-key
+        secret:
+          secretName: datastore-key
+      containers:
+      - image: feathers-chat-datastore
+        imagePullPolicy: Never
+        name: feathers-chat-datastore
+        ports:
+        - containerPort: 3030
+        volumeMounts:
+        - name: google-cloud-key
+          mountPath: /var/secrets/google
+        env:
+        - name: GOOGLE_APPLICATION_CREDENTIALS
+          value: /var/secrets/google/key.json
+        - name: DATASTORE_PROJECT_ID
+          # you'll have to put your own project ID here
+          value: your-project-123456
