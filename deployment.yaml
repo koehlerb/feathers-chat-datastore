@@ -5,7 +5,7 @@ metadata:
     run: feathers-chat-datastore
   name: feathers-chat-datastore
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       run: feathers-chat-datastore

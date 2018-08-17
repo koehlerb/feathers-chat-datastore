@@ -10,6 +10,8 @@ const configuration = require('@feathersjs/configuration');
 const express = require('@feathersjs/express');
 const socketio = require('@feathersjs/socketio');
 
+const sync = require( 'feathers-sync' );
+
 
 const middleware = require('./middleware');
 const services = require('./services');
@@ -19,6 +21,10 @@ const channels = require('./channels');
 const authentication = require('./authentication');
 
 const app = express(feathers());
+
+app.configure(sync({
+  uri: 'redis://redis-master:6379'
+}));
 
 // Load app configuration
 app.configure(configuration());

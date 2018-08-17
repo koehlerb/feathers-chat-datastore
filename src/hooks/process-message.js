@@ -27,6 +27,8 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
       createdAt: new Date().getTime()
     };
 
+    // console.log( "***: " + text );
+
     // Best practise, hooks should always return the context
     return context;
   };
