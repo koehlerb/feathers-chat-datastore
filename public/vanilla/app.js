@@ -1,7 +1,9 @@
 /* global document, window, feathers, moment, io */
 
 // Establish a Socket.io connection
-const socket = io();
+const socket = io({
+  transports: ['websocket']
+});
 // Initialize our Feathers client application through Socket.io
 // with hooks and authentication.
 const client = feathers();
